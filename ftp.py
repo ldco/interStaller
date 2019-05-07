@@ -1,0 +1,6 @@
+#for ftp
+class Ftp {
+
+}
+
+

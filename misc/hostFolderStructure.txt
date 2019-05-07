@@ -1,0 +1,7 @@
+DIST HOST STRUCTURE
+
+var host 
+var appName
+var OSdist (Win/Lin/Mac/Cordova)
+
+ftp:// + "host" + /soft/ + "appName" + /Dist/ + "OSdist" + / + "appName" + "OSdist" + Dist.zip
