@@ -1,6 +1,10 @@
 from local import Folder
 from download import Down
 from unzip import Unzip
+from local import localFilename
+from local import localDataFilename
+from local import applicationDir
+from local import localDataFoldername
 
 
 f = Folder()
@@ -8,7 +12,6 @@ d = Down()
 z = Unzip()
 
 f.exist()
-
 if not f.appExists:
     f.mkDirApp()
 else:
@@ -39,3 +42,6 @@ else:
         print('Please select y or n. n is recomended')
 
 d.disConnectFTP()
+
+z.unzippApp(localFilename, applicationDir)
+z.unzippApp(localDataFilename, localDataFoldername)

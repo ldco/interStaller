@@ -17,8 +17,9 @@ if platform.system() == 'Windows':
 
 applicationDir = os.path.join(userDir, appName)
 applicationData = os.path.join(localAppData, appName)
-
+appFilename = appName + OSdist + 'Dist.zip'
 localDataFoldername = applicationData + '/' + 'Data'
+localFilename = applicationDir + '/' + appFilename
 localDataFilename = localDataFoldername + '/' + 'Data.zip'
 
 
@@ -82,7 +83,7 @@ class Folder:
         try:
             print('Creating new app folder')
             os.makedirs(applicationDir)
-            print('New app folder created')
+            print('New app folder created as ' + applicationDir)
         except Exception as e:
             print(e)
             print('Error create new app folder')
@@ -91,7 +92,7 @@ class Folder:
         try:
             print('Creating new config folder')
             os.makedirs(applicationData)
-            print('New config folder created')
+            print('New config folder created as ' + applicationData)
         except Exception as e:
             print(e)
             print('Error create new config folder')
@@ -100,7 +101,7 @@ class Folder:
         try:
             print('Creating new data folder')
             os.makedirs(localDataFoldername)
-            print('New Data folder created')
+            print('New Data folder created as ' + localDataFoldername)
         except Exception as e:
             print(e)
             print('Error create new Data folder')

@@ -3,6 +3,8 @@ from local import OSdist
 from local import applicationDir
 from local import applicationData
 from local import localDataFilename
+from local import localFilename
+from local import appFilename
 from vars import *
 
 
@@ -10,9 +12,8 @@ class Down:
 
     url = appName + '/Dist/' + OSdist
     dataUrl = appName + '/Data/'
-    appFilename = appName + OSdist + 'Dist.zip'
+
     dataFileName = 'Data.zip'
-    localFilename = applicationDir + '/' + appFilename
 
     def connectFTP(self):
         try:
@@ -38,9 +39,9 @@ class Down:
         try:
             print('Downloading app files...')
 
-            open(self.localFilename, 'wb')
-            ftp.retrbinary('RETR ' + self.appFilename,
-                           open(self.localFilename, 'wb').write)
+            open(localFilename, 'wb')
+            ftp.retrbinary('RETR ' + appFilename,
+                           open(localFilename, 'wb').write)
             print('Zip app downloaded')
         except Exception as e:
             print(e)
