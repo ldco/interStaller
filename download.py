@@ -29,7 +29,7 @@ class Down:
     def downloadAppFiles(self):
         try:
             ftp.cwd(self.url)
-            print('Changed directory to Dist')
+            print('Changed directory to ' + ftp.pwd())
             # printL("מוריד קבצים")
         except Exception as e:
             print(e)
@@ -49,10 +49,11 @@ class Down:
 
     def downloadDataFiles(self):
         try:
+            print('Changing directory to Data')
             ftp.cwd('..')
             ftp.cwd('..')
-            ftp.cwd(self.dataUrl)
-            print('Changed directory to Data')
+            ftp.cwd('Data')
+            print('Changed directory to ' + ftp.pwd())
             # printL("מוריד קבצים")
         except Exception as e:
             print(e)
@@ -60,8 +61,6 @@ class Down:
             # printL("אירעה שגיאה...")
         try:
             print('Downloading Data file...')
-            print(self.dataFileName)
-
             open(localDataFilename, 'wb')
             ftp.retrbinary('RETR ' + self.dataFileName,
                            open(localDataFilename, 'wb').write)

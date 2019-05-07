@@ -28,6 +28,7 @@ class Folder:
     configExists = False
 
     def exist(self):
+        print('Checking for existing app folders')
         if os.path.exists(applicationDir):
             self.appExists = True
             print('App directory exists')
@@ -79,6 +80,7 @@ class Folder:
 
     def mkDirApp(self):
         try:
+            print('Creating new app folder')
             os.makedirs(applicationDir)
             print('New app folder created')
         except Exception as e:
@@ -87,6 +89,7 @@ class Folder:
 
     def mkDirConfig(self):
         try:
+            print('Creating new config folder')
             os.makedirs(applicationData)
             print('New config folder created')
         except Exception as e:
@@ -95,6 +98,7 @@ class Folder:
 
     def mkDirData(self):
         try:
+            print('Creating new data folder')
             os.makedirs(localDataFoldername)
             print('New Data folder created')
         except Exception as e:
