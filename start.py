@@ -1,9 +1,11 @@
 from local import Folder
 from download import Down
+from unzip import Unzip
 
 
 f = Folder()
 d = Down()
+z = Unzip()
 
 f.exist()
 
@@ -17,15 +19,20 @@ d.connectFTP()
 d.downloadAppFiles()
 
 if not f.dataExists:
+    if f.configExists:
+        f.uninstallConfig()
+        f.mkDirConfig()
+    f.mkDirConfig()
     f.mkDirData()
     d.downloadDataFiles()
 else:
     q = input(
         'Data folder exist. Overwrite with initial data? WARNING: all data will be lost!\nn/y\n')
     if q == 'y':
-        f.uninstallData()
+        f.uninstallConfig()
+        f.mkDirConfig()
         f.mkDirData()
-        # d.downloadDataFiles()
+        d.downloadDataFiles()
     elif q == 'n':
         print('Data folder will not be reset')
     else:

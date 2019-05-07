@@ -18,10 +18,14 @@ if platform.system() == 'Windows':
 applicationDir = os.path.join(userDir, appName)
 applicationData = os.path.join(localAppData, appName)
 
+localDataFoldername = applicationData + '/' + 'Data'
+localDataFilename = localDataFoldername + '/' + 'Data.zip'
+
 
 class Folder:
     appExists = False
     dataExists = False
+    configExists = False
 
     def exist(self):
         if os.path.exists(applicationDir):
@@ -30,7 +34,15 @@ class Folder:
         else:
             self.appExists = False
             print('App directory not exists')
+
         if os.path.exists(applicationData):
+            self.configExists = True
+            print('Config directory exists')
+        else:
+            self.configExists = False
+            print('Config directory not exists')
+
+        if os.path.exists(localDataFoldername):
             self.dataExists = True
             print('Data directory exists')
         else:
@@ -42,7 +54,8 @@ class Folder:
         try:
             shutil.rmtree(applicationDir)
             print('Old version removed')
-        except:
+        except Exception as e:
+            print(e)
             print('Error removing old version')
         # FOR WINDOWS
         taskKill = 'taskkill /f /im  ' + appName + '.exe'
@@ -51,27 +64,39 @@ class Folder:
             try:
                 os.system(taskKill)
                 print('Windows task killed')
-            except:
+            except Exception as e:
+                print(e)
                 print('Error killing Windows task')
 
-    def uninstallData(self):
-        print('Removing Data!')
+    def uninstallConfig(self):
+        print('Removing Config and Data!')
         try:
             shutil.rmtree(applicationData)
-            print('Data removed')
-        except:
-            print('Error removing Data')
+            print('Config and Data removed')
+        except Exception as e:
+            print(e)
+            print('Error removing Config and Data')
 
     def mkDirApp(self):
         try:
             os.makedirs(applicationDir)
             print('New app folder created')
-        except:
+        except Exception as e:
+            print(e)
             print('Error create new app folder')
+
+    def mkDirConfig(self):
+        try:
+            os.makedirs(applicationData)
+            print('New config folder created')
+        except Exception as e:
+            print(e)
+            print('Error create new config folder')
 
     def mkDirData(self):
         try:
-            os.makedirs(applicationData)
+            os.makedirs(localDataFoldername)
             print('New Data folder created')
-        except:
+        except Exception as e:
+            print(e)
             print('Error create new Data folder')
