@@ -3,7 +3,7 @@
 ## Cross-platform' electron based installer
 
 
-<img src="https://github.com/ldco/interStaller/blob/master/img/iStallerLogo.png"  width="600">
+<img src="https://github.com/ldco/interStaller/blob/master/iStallerLogo.png"  width="600">
 
 ##
 
