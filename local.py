@@ -71,17 +71,8 @@ class Folder:
 
     def uninstallApp(self):
         print(lang[Ul][22])
-        # FOR WINDOWS
-        taskKill = 'taskkill /f /im  ' + appName + '.exe'
-        if OSdist == 'Win':
-            print(lang[Ul][25])
-            try:
-                os.system(taskKill)
-                print(lang[Ul][26])
-            except Exception as e:
-                print(e)
-                print(lang[Ul][27])
         try:
+            self.killWinTask()
             shutil.rmtree(applicationDir)
             print(lang[Ul][23])
         except Exception as e:
@@ -91,6 +82,7 @@ class Folder:
     def uninstallConfig(self):
         print(lang[Ul][28])
         try:
+            self.killWinTask()
             shutil.rmtree(applicationData)
             print(lang[Ul][44])
         except Exception as e:
@@ -123,3 +115,15 @@ class Folder:
         except Exception as e:
             print(e)
             print(lang[Ul][38])
+
+    def killWinTask(self):
+        # FOR WINDOWS
+        taskKill = 'taskkill /f /im  ' + appName + '.exe'
+        if OSdist == 'Win':
+            print(lang[Ul][25])
+            try:
+                os.system(taskKill)
+                print(lang[Ul][26])
+            except Exception as e:
+                print(e)
+                print(lang[Ul][27])

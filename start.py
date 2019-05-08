@@ -1,6 +1,7 @@
 from download import Down
 from unzip import Unzip
 from local import Folder, localFilename, localDataFilename, applicationDir, localDataFoldername, Ul, OSdist
+from threading import Timer
 
 if OSdist == 'Win':
     from desktop import createWinShortcut
@@ -49,10 +50,10 @@ def installData():
 
 
 def uninstalAll():
+    t = Timer(2.0, f.uninstallApp)
     f.uninstallConfig()
-    f.uninstallApp()
-    if not f.uninstallApp:
-        f.uninstallApp()
+
+    t.start()
     if OSdist == 'Win':
         removeWinShortcut()
 
