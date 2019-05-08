@@ -1,6 +1,0 @@
-#for ftp
-class Ftp {
-
-}
-
-

@@ -1,11 +1,7 @@
 from ftplib import FTP
-from local import OSdist
-from local import applicationDir
-from local import applicationData
-from local import localDataFilename
-from local import localFilename
-from local import appFilename
+from local import OSdist, applicationDir, applicationData, localDataFilename, localFilename, appFilename, Ul
 from vars import *
+from lang import lang
 
 
 class Down:
@@ -20,65 +16,64 @@ class Down:
             global ftp
             ftp = FTP(ftpHost)
             ftp.login(user=ftpUsername, passwd=ftpPassword)
-            print('Connected to FTP')
+            print(lang[Ul][1])
             # printL("מחובר לשרת")
         except Exception as e:
             print(e)
-            print('Error connect to FTP')
+            print(lang[Ul][2])
             # printL("אירעה שגיאה...")
 
     def downloadAppFiles(self):
         try:
+            print(lang[Ul][43])
             ftp.cwd(self.url)
-            print('Changed directory to ' + ftp.pwd())
+            print(lang[Ul][3] + ftp.pwd())
             # printL("מוריד קבצים")
         except Exception as e:
             print(e)
-            print('Error change directory to Dist')
+            print(lang[Ul][4] + ftp.pwd())
             # printL("אירעה שגיאה...")
         try:
-            print('Downloading app files...')
+            print(lang[Ul][5])
 
             open(localFilename, 'wb')
             ftp.retrbinary('RETR ' + appFilename,
                            open(localFilename, 'wb').write)
-            print('Zip app downloaded')
+            print(lang[Ul][6])
         except Exception as e:
             print(e)
-            print('Error downloading app')
+            print(lang[Ul][7])
             # printL("אירעה שגיאה...")
 
     def downloadDataFiles(self):
         try:
-            print('Changing directory to Data')
-            ftp.cwd('..')
-            ftp.cwd('..')
-            ftp.cwd('Data')
-            print('Changed directory to ' + ftp.pwd())
+            print(lang[Ul][8])
+            ftp.cwd(self.dataUrl)
+            print(lang[Ul][3] + ftp.pwd())
             # printL("מוריד קבצים")
         except Exception as e:
             print(e)
-            print('Error change directory to Data')
+            print(lang[Ul][4] + ftp.pwd())
             # printL("אירעה שגיאה...")
         try:
-            print('Downloading Data file...')
+            print(lang[Ul][9])
             open(localDataFilename, 'wb')
             ftp.retrbinary('RETR ' + self.dataFileName,
                            open(localDataFilename, 'wb').write)
-            print('Zip Data downloaded')
+            print(lang[Ul][10])
         except Exception as e:
             print(e)
-            print('Error downloading Data')
+            print(lang[Ul][11])
             # printL("אירעה שגיאה...")
 
     def disConnectFTP(self):
         try:
-            print('Disconnecting from FTP...')
+            print(lang[Ul][12])
             ftp.quit()
-            print('Disconnected from FTP')
+            print(lang[Ul][13])
             # printL("נותק מהשרת")
 
         except Exception as e:
             print(e)
-            print('Error disconnect from ftp')
+            print(lang[Ul][14])
             # printL("אירעה שגיאה...")

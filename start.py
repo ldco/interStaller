@@ -1,47 +1,61 @@
-from local import Folder
 from download import Down
 from unzip import Unzip
-from local import localFilename
-from local import localDataFilename
-from local import applicationDir
-from local import localDataFoldername
+from local import Folder, localFilename, localDataFilename, applicationDir, localDataFoldername, Ul, OSdist
+
+if OSdist == 'Win':
+    from desktop import createWinShortcut
+    from desktop import removeWinShortcut
 
 
 f = Folder()
 d = Down()
 z = Unzip()
 
+print("USER LANG = " + Ul)
+
 f.exist()
-if not f.appExists:
-    f.mkDirApp()
-else:
-    f.uninstallApp()
-    f.mkDirApp()
 
-d.connectFTP()
-d.downloadAppFiles()
 
-if not f.dataExists:
-    if f.configExists:
-        f.uninstallConfig()
+def installApp():
+    d.connectFTP()
+    if not f.appExists:
+        f.mkDirApp()
+    else:
+        f.uninstallApp()
+        f.mkDirApp()
+    d.downloadAppFiles()
+    d.disConnectFTP()
+    z.unzippApp(localFilename, applicationDir)
+    if OSdist == 'Win':
+        createWinShortcut()
+
+
+def installData():
+    d.connectFTP()
+    if not f.dataExists:
+        if f.configExists:
+            f.uninstallConfig()
+            f.mkDirConfig()
         f.mkDirConfig()
-    f.mkDirConfig()
-    f.mkDirData()
-    d.downloadDataFiles()
-else:
-    q = input(
-        'Data folder exist. Overwrite with initial data? WARNING: all data will be lost!\nn/y\n')
-    if q == 'y':
+        f.mkDirData()
+    else:
         f.uninstallConfig()
         f.mkDirConfig()
         f.mkDirData()
-        d.downloadDataFiles()
-    elif q == 'n':
-        print('Data folder will not be reset')
-    else:
-        print('Please select y or n. n is recomended')
 
-d.disConnectFTP()
+    d.downloadDataFiles()
+    d.disConnectFTP()
+    z.unzippApp(localDataFilename, localDataFoldername)
 
-z.unzippApp(localFilename, applicationDir)
-z.unzippApp(localDataFilename, localDataFoldername)
+
+def uninstalAll():
+    f.uninstallConfig()
+    f.uninstallApp()
+    if not f.uninstallApp:
+        f.uninstallApp()
+    if OSdist == 'Win':
+        removeWinShortcut()
+
+
+def backupData():
+    pass
