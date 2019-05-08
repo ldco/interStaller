@@ -52,5 +52,8 @@ lang = {'en': {
     50: 'Removing Windows shortcut',
     51: 'Error removing Windows shortcut',
     52: 'Windows shortcut removed',
-
+    53: '\nTo reinstall or upgrade ONLY THE APP press 1\nTo reinstall or upgrade THE APP and THE DATA\n(WARNING: ACTUAL DATA WILL BE LOST!) press 2\nTo uninstall ALL press 3\nTo backup THE DATA press 4\nCancel and EXIT press 5\n',
+    54: '\nTo reinstall or upgrade THE APP press 2\nTo uninstall ALL press 3\nTo backup THE DATA press 4\nCancel and EXIT press 5\n',
+    55: '\nTo install THE APP press 1\nTo reinstall or upgrade THE APP and THE DATA\n(WARNING: ACTUAL DATA WILL BE LOST!) press 2\nTo uninstall ALL press 3\nTo backup THE DATA press 4\nCancel and EXIT press 5\n',
+    56: '\nTo install THE APP press 2\nCancel and EXIT press 5\n'
 }}
