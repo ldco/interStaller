@@ -50,10 +50,14 @@ def installData():
 def uninstalAll():
     t = Timer(2.0, f.uninstallApp)
     f.uninstallConfig()
-
     t.start()
     if OSdist == 'Win':
         removeWinShortcut()
+
+
+def installAppData():
+    installApp()
+    installData()
 
 
 def backupData():
