@@ -1,25 +1,23 @@
+from logo64 import imgData
+from lang import lang, buttons
+from start import installApp, installData, installAppData, uninstalAll, backupData
+from local import innerPath, Ul, Folder
+from vars import appName
+from rtl import rtl
+import time
 from tkinter import *
 from tkinter import ttk, messagebox
 from PIL import Image, ImageTk
-from rtl import rtl
-from vars import appName
-from local import innerPath, Ul, Folder
-from start import installApp, installData, installAppData, uninstalAll, backupData
-from lang import lang, buttons
 import sys
-from rtl import rtl
 from threading import Timer
-import time
+
 
 f = Folder()
 f.exist()
 
 
 def ext():
-    try:
-        sys.exit()
-    except:
-        exit()
+    sys.exit()
 
 
 class Gui:
@@ -32,34 +30,37 @@ class Gui:
     rootH = 500
     rootW = 550
     imageLogo = "img/logoInstall.png"
+    imageData = imgData
 
     root = Tk()
 
     def ct(self, x):
         self._curStateLabelText.set(str(lang[Ul][x]))
 
-    def exitBut(self):
+    def exitBut(self, x):
         self.cancelButt.destroy()
         self.installButt.destroy()
         self.uninstButt.destroy()
         Button(self.fbuttons, relief='flat',
-               text=buttons[Ul][10], bd=0, command=quit).pack(padx=20, side=LEFT)
+               text=buttons[Ul][10], bd=0, command=x).pack(padx=20, side=LEFT)
 
     def afterInstall(self):
         f.exist()
         if f.dataExists and f.dataExists:
             self.curStateLabel.config(fg=self.green)
             self.ct(65)
-            self.exitBut()
+            self.exitBut(ext)
 
         else:
             self.curStateLabel.config(fg=self.red)
             self.ct(68)
-            self.exitBut()
+            self.exitBut(ext)
 
     def afterUnInstall(self):
         f.exist()
         if not f.dataExists and not f.dataExists:
+
+            time.sleep(5)
             self.curStateLabel.config(fg=self.green)
             self.ct(67)
 
@@ -99,12 +100,15 @@ class Gui:
         def x():
             uninstalAll()
             self.afterUnInstall()
-        x()
+
+        def y():
+            self.ct(66)
+            self.exitBut(ext)
+
         t = Timer(2, x)
         t.start()
 
-        self.exitBut()
-        self.ct(66)
+        y()
 
     def backupDataGui(self):
         backupData()
@@ -125,7 +129,8 @@ class Gui:
         self.root["bg"] = self.backg
 
         # LOGO
-        logo = ImageTk.PhotoImage(file=innerPath + str(self.imageLogo))
+        ''' logo = ImageTk.PhotoImage(file=innerPath + str(self.imageLogo)) '''
+        logo = PhotoImage(data=self.imageData)
         flogo = Frame(self.root)
         flogo.pack()
         logoLabel = Label(flogo, bg=self.backg, image=logo)
@@ -178,7 +183,7 @@ class Gui:
         self.uninstButt = Button(self.fbuttons, relief='flat',
                                  text=uninst, bd=0, command=self.uninstalAllGui)
         self.cancelButt = Button(self.fbuttons, relief='flat',
-                                 text=cancel, bd=0, command=quit)
+                                 text=cancel, bd=0, command=ext)
         if f.appExists:
             if f.dataExists:
                 self.cancelButt.pack(padx=20, side=LEFT)
