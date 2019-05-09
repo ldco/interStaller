@@ -34,11 +34,6 @@ target = os.path.join(scriptsDir, packageName + '.exe')
 # Name of link file
 linkName = packageName + '.lnk'
 
-# Read location of Windows desktop folder from registry
-# regName = 'Desktop'
-# regPath = r'Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders'
-# desktopFolder = os.path.normpath(get_reg(regName, regPath))
-
 # Path to location of link file
 _pathLink = os.path.join(userDir, 'Desktop')
 pathLink = os.path.join(_pathLink, linkName)

@@ -64,7 +64,7 @@ lang = {'en': {
     65: 'Successfully installed',
     66: 'Unistalling...',
     67: 'Successfully uninstalled',
-    68: '',
+    68: 'Error occured, please reinstall',
     69: '',
     70: '',
     71: '',
