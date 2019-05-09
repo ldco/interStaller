@@ -80,4 +80,5 @@ buttons = {'en': {
     7: 'Welcome to',
     8: 'installer',
     9: 'Reinstall',
+    10: 'Exit'
 }}

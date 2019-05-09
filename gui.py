@@ -38,63 +38,77 @@ class Gui:
     def ct(self, x):
         self._curStateLabelText.set(str(lang[Ul][x]))
 
-    def afterInstall(self, x, y):
+    def exitBut(self):
+        self.cancelButt.destroy()
+        self.installButt.destroy()
+        self.uninstButt.destroy()
+        Button(self.fbuttons, relief='flat',
+               text=buttons[Ul][10], bd=0, command=quit).pack(padx=20, side=LEFT)
+
+    def afterInstall(self):
         f.exist()
         if f.dataExists and f.dataExists:
             self.curStateLabel.config(fg=self.green)
-            self.ct(x)
+            self.ct(65)
+            self.exitBut()
+
         else:
             self.curStateLabel.config(fg=self.red)
-            self.ct(y)
+            self.ct(68)
+            self.exitBut()
+
+    def afterUnInstall(self):
+        f.exist()
+        if not f.dataExists and not f.dataExists:
+            self.curStateLabel.config(fg=self.green)
+            self.ct(67)
+
+        else:
+            self.curStateLabel.config(fg=self.red)
+            self.ct(68)
 
     def installAppGui(self):
         def x():
             installApp()
-            self.afterInstall(65, 68)
+            self.afterInstall()
 
         def y():
             installApp()
             installData()
-            self.afterInstall(65, 68)
+            self.afterInstall()
 
         if f.dataExists:
             t = Timer(0.1, x)
             t.start()
             self.ct(64)
-            ''' e = Timer(1, ext)
-            e.start() '''
-            ext()
 
         if not f.dataExists:
             t = Timer(0.1, y)
             t.start()
             self.ct(64)
-            ''' e = Timer(1, ext)
-            e.start() '''
 
     def installDataGui(self):
         installData()
-        exit()
+        ext()
 
     def installAppDataGui(self):
         installAppData()
-        exit()
+        ext()
 
     def uninstalAllGui(self):
         def x():
             uninstalAll()
-            self.afterInstall(67, 68)
-
-        t = Timer(0.5, x)
+            self.afterUnInstall()
+        x()
+        t = Timer(2, x)
         t.start()
-        self.ct(66)
 
-        e = Timer(2, exit)
-        e.start()
+        self.exitBut()
+        self.ct(66)
 
     def backupDataGui(self):
         backupData()
-        exit()
+        ext()
 
     def initialGui(self):
         # MAIN WIN
@@ -156,31 +170,31 @@ class Gui:
             inst = rtl(buttons[Ul][9])
         if not f.appExists:
             inst = rtl(buttons[Ul][4])
-        fbuttons = Frame(self.root, bg=self.backg)
-        fbuttons.pack(side=BOTTOM, pady=40)
+        self.fbuttons = Frame(self.root, bg=self.backg)
+        self.fbuttons.pack(side=BOTTOM, pady=40)
 
-        installButt = Button(fbuttons, relief='flat', text=inst,
-                             bd=0, command=self.installAppGui)
-        uninstButt = Button(fbuttons, relief='flat',
-                            text=uninst, bd=0, command=self.uninstalAllGui)
-        cancelButt = Button(fbuttons, relief='flat',
-                            text=cancel, bd=0, command=quit)
+        self.installButt = Button(self.fbuttons, relief='flat', text=inst,
+                                  bd=0, command=self.installAppGui)
+        self.uninstButt = Button(self.fbuttons, relief='flat',
+                                 text=uninst, bd=0, command=self.uninstalAllGui)
+        self.cancelButt = Button(self.fbuttons, relief='flat',
+                                 text=cancel, bd=0, command=quit)
         if f.appExists:
             if f.dataExists:
-                cancelButt.pack(padx=20, side=LEFT)
-                installButt.pack(padx=20, side=LEFT)
-                uninstButt.pack(padx=20, side=LEFT)
+                self.cancelButt.pack(padx=20, side=LEFT)
+                self.installButt.pack(padx=20, side=LEFT)
+                self.uninstButt.pack(padx=20, side=LEFT)
             if not f.dataExists:
-                cancelButt.pack(padx=20, side=LEFT)
-                installButt.pack(padx=20, side=LEFT)
-                uninstButt.pack(padx=20, side=LEFT)
+                self.cancelButt.pack(padx=20, side=LEFT)
+                self.installButt.pack(padx=20, side=LEFT)
+                self.uninstButt.pack(padx=20, side=LEFT)
         if not f.appExists:
             if f.dataExists:
-                cancelButt.pack(padx=20, side=LEFT)
-                installButt.pack(padx=20, side=LEFT)
+                self.cancelButt.pack(padx=20, side=LEFT)
+                self.installButt.pack(padx=20, side=LEFT)
             if not f.dataExists:
-                cancelButt.pack(padx=20, side=LEFT)
-                installButt.pack(padx=20, side=LEFT)
+                self.cancelButt.pack(padx=20, side=LEFT)
+                self.installButt.pack(padx=20, side=LEFT)
 
         self.root.mainloop()
 
