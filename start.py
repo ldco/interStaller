@@ -12,8 +12,6 @@ f = Folder()
 d = Down()
 z = Unzip()
 
-print("USER LANG = " + Ul)
-
 
 def installApp():
     d.connectFTP()

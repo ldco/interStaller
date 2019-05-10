@@ -31,6 +31,9 @@ if OSdist == 'Win':
 
 Ul = userLang[:2]
 
+if Ul != 'en':
+    Ul = 'en'
+
 
 # FOLDERS & FILES VARS
 applicationDir = os.path.join(userDir, appName)

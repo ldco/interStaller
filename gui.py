@@ -1,7 +1,7 @@
 from logo64 import imgData
 from lang import lang, buttons
 from start import installApp, installData, installAppData, uninstalAll, backupData
-from local import innerPath, Ul, Folder
+from local import innerPath, Ul, Folder, OSdist
 from vars import appName
 from rtl import rtl
 import time
@@ -10,6 +10,7 @@ from tkinter import ttk, messagebox
 from PIL import Image, ImageTk
 import sys
 from threading import Timer
+from tkinter.ttk import Progressbar
 
 
 f = Folder()
@@ -46,15 +47,14 @@ class Gui:
 
     def afterInstall(self):
         f.exist()
+        self.pBar.destroy()
         if f.dataExists and f.dataExists:
             self.curStateLabel.config(fg=self.green)
             self.ct(65)
-            self.exitBut(ext)
 
         else:
             self.curStateLabel.config(fg=self.red)
             self.ct(68)
-            self.exitBut(ext)
 
     def afterUnInstall(self):
         f.exist()
@@ -70,23 +70,35 @@ class Gui:
 
     def installAppGui(self):
         def x():
+            pBar()
             installApp()
             self.afterInstall()
 
+        def z():
+            self.ct(64)
+            self.exitBut(ext)
+
+        def pBar():
+            self.pBar = Progressbar(
+                self.root, orient=HORIZONTAL, length=200, mode="determinate", takefocus=True, maximum=100)
+            self.pBar.pack()
+            for i in range(100):
+                self.pBar.step()
+                self.root.update()
+
         def y():
+            pBar()
             installApp()
             installData()
             self.afterInstall()
 
         if f.dataExists:
-            t = Timer(0.1, x)
-            t.start()
-            self.ct(64)
+            z()
+            x()
 
         if not f.dataExists:
-            t = Timer(0.1, y)
-            t.start()
-            self.ct(64)
+            z()
+            y()
 
     def installDataGui(self):
         installData()
