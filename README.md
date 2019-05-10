@@ -1,6 +1,6 @@
 # interStaller
 
-## Cross-platform' electron based installer
+## Cross-platform (tested on Lin and Win) ftp based python (GUI & CLI) installer for Electron apps. 
 
 
 <img src="https://github.com/ldco/interStaller/blob/master/iStallerLogo.png"  width="600">
